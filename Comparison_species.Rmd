@@ -9,8 +9,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 #read data, both testing and training
-temp_37_train <- read.delim("/Users/stella/RF Loop Results/Misclassify_train.txt", sep = " ", header = T)
-temp_37_test <- read.delim("/Users/stella/RF Loop Results/Misclassify_test.txt", sep = " ", header = T)
+temp_37_train <- read.delim("RF Loop Results/Misclassify_train.txt", sep = " ", header = T)
+temp_37_test <- read.delim("RF Loop Results/Misclassify_test.txt", sep = " ", header = T)
 match_indices <- match(row.names(temp_37_train), row.names(temp_37_test))
 #bind the 2 data frames
 temp_37 <- cbind(temp_37_train,temp_37_test[match_indices,-1])
@@ -20,8 +20,8 @@ temp_37$misclassify <- temp_37$misclassify + temp_37$`temp_37_test[match_indices
 temp_37 <- temp_37[,1:2]
 
 #Resistance 1
-X_FC_resistance_train <- read.delim("/Users/stella/resistance/X_FC_resistance/Misclassify_train_resistance_1.txt", sep = " ", header = T)
-X_FC_resistance_test <- read.delim("/Users/stella/resistance/X_FC_resistance/Misclassify_test_resistance_1.txt", sep = " ", header = T)
+X_FC_resistance_train <- read.delim("resistance/X_FC_resistance/Misclassify_train_resistance_1.txt", sep = " ", header = T)
+X_FC_resistance_test <- read.delim("resistance/X_FC_resistance/Misclassify_test_resistance_1.txt", sep = " ", header = T)
 match_indices <- match(row.names(X_FC_resistance_train), row.names(X_FC_resistance_test))
 #bind the 2 data frames
 X_FC_resistance <- cbind(X_FC_resistance_train,X_FC_resistance_test[match_indices,-1])
@@ -31,8 +31,8 @@ X_FC_resistance$misclassify <- X_FC_resistance$misclassify + X_FC_resistance$`X_
 X_FC_resistance <- X_FC_resistance[,1:2]
 
 #Resistance 2
-Fluconazole_resistance_train <- read.delim("/Users/stella/resistance/Fluconazole_resistance/Misclassify_train_resistance_2.txt", sep = " ", header = T)
-Fluconazole_resistance_test <- read.delim("/Users/stella/resistance/Fluconazole_resistance/Misclassify_test_resistance_2.txt", sep = " ", header = T)
+Fluconazole_resistance_train <- read.delim("resistance/Fluconazole_resistance/Misclassify_train_resistance_2.txt", sep = " ", header = T)
+Fluconazole_resistance_test <- read.delim("resistance/Fluconazole_resistance/Misclassify_test_resistance_2.txt", sep = " ", header = T)
 match_indices <- match(row.names(Fluconazole_resistance_train), row.names(Fluconazole_resistance_test))
 #bind the 2 data frames
 Fluconazole_resistance <- cbind(Fluconazole_resistance_train,Fluconazole_resistance_test[match_indices,-1])
@@ -42,8 +42,8 @@ Fluconazole_resistance$misclassify <- Fluconazole_resistance$misclassify + Fluco
 Fluconazole_resistance <- Fluconazole_resistance[,1:2]
 
 #Resistance 3
-Itraconazole_resistance_train <- read.delim("/Users/stella/resistance/Itraconazole_resistance/Misclassify_train_resistance_3.txt", sep = " ", header = T)
-Itraconazole_resistance_test <- read.delim("/Users/stella/resistance/Itraconazole_resistance/Misclassify_test_resistance_3.txt", sep = " ", header = T)
+Itraconazole_resistance_train <- read.delim("resistance/Itraconazole_resistance/Misclassify_train_resistance_3.txt", sep = " ", header = T)
+Itraconazole_resistance_test <- read.delim("resistance/Itraconazole_resistance/Misclassify_test_resistance_3.txt", sep = " ", header = T)
 match_indices <- match(row.names(Itraconazole_resistance_train), row.names(Itraconazole_resistance_test))
 #bind the 2 data frames
 Itraconazole_resistance <- cbind(Itraconazole_resistance_train,Itraconazole_resistance_test[match_indices,-1])
@@ -53,8 +53,8 @@ Itraconazole_resistance$misclassify <- Itraconazole_resistance$misclassify + Itr
 Itraconazole_resistance <- Itraconazole_resistance[,1:2]
 
 #Resistance 4
-Voriconazole_resistance_train <- read.delim("/Users/stella/resistance/Voriconazole_resistance/Misclassify_train_resistance_4.txt", sep = " ", header = T)
-Voriconazole_resistance_test <- read.delim("/Users/stella/resistance/Voriconazole_resistance/Misclassify_test_resistance_4.txt", sep = " ", header = T)
+Voriconazole_resistance_train <- read.delim("resistance/Voriconazole_resistance/Misclassify_train_resistance_4.txt", sep = " ", header = T)
+Voriconazole_resistance_test <- read.delim("resistance/Voriconazole_resistance/Misclassify_test_resistance_4.txt", sep = " ", header = T)
 match_indices <- match(row.names(Voriconazole_resistance_train), row.names(Voriconazole_resistance_test))
 #bind the 2 data frames
 Voriconazole_resistance <- cbind(Voriconazole_resistance_train,Voriconazole_resistance_test[match_indices,-1])
@@ -64,8 +64,8 @@ Voriconazole_resistance$misclassify <- Voriconazole_resistance$misclassify + Vor
 Voriconazole_resistance <- Voriconazole_resistance[,1:2]
 
 #Resistance 5
-Posaconazole_resistance_train <- read.delim("/Users/stella/resistance/Posaconazole_resistance/Misclassify_train_resistance_5.txt", sep = " ", header = T)
-Posaconazole_resistance_test <- read.delim("/Users/stella/resistance/Posaconazole_resistance/Misclassify_test_resistance_5.txt", sep = " ", header = T)
+Posaconazole_resistance_train <- read.delim("resistance/Posaconazole_resistance/Misclassify_train_resistance_5.txt", sep = " ", header = T)
+Posaconazole_resistance_test <- read.delim("resistance/Posaconazole_resistance/Misclassify_test_resistance_5.txt", sep = " ", header = T)
 match_indices <- match(row.names(Posaconazole_resistance_train), row.names(Posaconazole_resistance_test))
 #bind the 2 data frames
 Posaconazole_resistance <- cbind(Posaconazole_resistance_train,Posaconazole_resistance_test[match_indices,-1])
@@ -75,8 +75,8 @@ Posaconazole_resistance$misclassify <- Posaconazole_resistance$misclassify + Pos
 Posaconazole_resistance <- Posaconazole_resistance[,1:2]
 
 #Resistance 6
-Terbinafin_resistance_train <- read.delim("/Users/stella/resistance/Terbinafin_resistance/Misclassify_train_resistance_6.txt", sep = " ", header = T)
-Terbinafin_resistance_test <- read.delim("/Users/stella/resistance/Terbinafin_resistance/Misclassify_test_resistance_6.txt", sep = " ", header = T)
+Terbinafin_resistance_train <- read.delim("resistance/Terbinafin_resistance/Misclassify_train_resistance_6.txt", sep = " ", header = T)
+Terbinafin_resistance_test <- read.delim("resistance/Terbinafin_resistance/Misclassify_test_resistance_6.txt", sep = " ", header = T)
 match_indices <- match(row.names(Terbinafin_resistance_train), row.names(Terbinafin_resistance_test))
 #bind the 2 data frames
 Terbinafin_resistance <- cbind(Terbinafin_resistance_train,Terbinafin_resistance_test[match_indices,-1])
@@ -86,8 +86,8 @@ Terbinafin_resistance$misclassify <- Terbinafin_resistance$misclassify + Terbina
 Terbinafin_resistance <- Terbinafin_resistance[,1:2]
 
 #Resistance 7
-Caspofungi_resistance_train <- read.delim("/Users/stella/resistance/Caspofungi_resistance/Misclassify_train_resistance_7.txt", sep = " ", header = T)
-Caspofungi_resistance_test <- read.delim("/Users/stella/resistance/Caspofungi_resistance/Misclassify_test_resistance_7.txt", sep = " ", header = T)
+Caspofungi_resistance_train <- read.delim("resistance/Caspofungi_resistance/Misclassify_train_resistance_7.txt", sep = " ", header = T)
+Caspofungi_resistance_test <- read.delim("resistance/Caspofungi_resistance/Misclassify_test_resistance_7.txt", sep = " ", header = T)
 match_indices <- match(row.names(Caspofungi_resistance_train), row.names(Caspofungi_resistance_test))
 #bind the 2 data frames
 Caspofungi_resistance <- cbind(Caspofungi_resistance_train,Caspofungi_resistance_test[match_indices,-1])
@@ -97,8 +97,8 @@ Caspofungi_resistance$misclassify <- Caspofungi_resistance$misclassify + Caspofu
 Caspofungi_resistance <- Caspofungi_resistance[,1:2]
 
 #Resistance 8
-Amphotericin_B_resistance_train <- read.delim("/Users/stella/resistance/Amphotericin_B_resistance/Misclassify_train_resistance_8.txt", sep = " ", header = T)
-Amphotericin_B_resistance_test <- read.delim("/Users/stella/resistance/Amphotericin_B_resistance/Misclassify_test_resistance_8.txt", sep = " ", header = T)
+Amphotericin_B_resistance_train <- read.delim("resistance/Amphotericin_B_resistance/Misclassify_train_resistance_8.txt", sep = " ", header = T)
+Amphotericin_B_resistance_test <- read.delim("resistance/Amphotericin_B_resistance/Misclassify_test_resistance_8.txt", sep = " ", header = T)
 match_indices <- match(row.names(Amphotericin_B_resistance_train), row.names(Amphotericin_B_resistance_test))
 #bind the 2 data frames
 Amphotericin_B_resistance <- cbind(Amphotericin_B_resistance_train,Amphotericin_B_resistance_test[match_indices,-1])
@@ -108,8 +108,8 @@ Amphotericin_B_resistance$misclassify <- Amphotericin_B_resistance$misclassify +
 Amphotericin_B_resistance <- Amphotericin_B_resistance[,1:2]
 
 #Resistance 9
-Resistance_to_azoles_train <- read.delim("/Users/stella/resistance/Resistance_to_azoles/Misclassify_train_resistance_9.txt", sep = " ", header = T)
-Resistance_to_azoles_test <- read.delim("/Users/stella/resistance/Resistance_to_azoles/Misclassify_test_resistance_9.txt", sep = " ", header = T)
+Resistance_to_azoles_train <- read.delim("resistance/Resistance_to_azoles/Misclassify_train_resistance_9.txt", sep = " ", header = T)
+Resistance_to_azoles_test <- read.delim("resistance/Resistance_to_azoles/Misclassify_test_resistance_9.txt", sep = " ", header = T)
 match_indices <- match(row.names(Resistance_to_azoles_train), row.names(Resistance_to_azoles_test))
 #bind the 2 data frames
 Resistance_to_azoles <- cbind(Resistance_to_azoles_train,Resistance_to_azoles_test[match_indices,-1])
