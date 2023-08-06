@@ -1,0 +1,116 @@
+---
+title: "Comparison_KEGG"
+output: html_document
+date: "2023-07-30"
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# MeanDecreaseAccuracy & KEGGS
+```{r}
+#read files
+#MeanDecreaseAccuracy/Keggs
+temp_37 <- read.delim("/Users/stella/RF Loop Results/MeanDecreaseAccuracy.txt", sep = " ", header = T)
+X_FC_resistance <- read.delim("/Users/stella/resistance/X_FC_resistance/MeanDecreaseAccuracy_resistance_1.txt", sep = " ", header = T)
+Fluconazole_resistance <- read.delim("/Users/stella/resistance/Fluconazole_resistance/MeanDecreaseAccuracy_resistance_2.txt", sep = " ", header = T)
+Itraconazole_resistance <- read.delim("/Users/stella/resistance/Itraconazole_resistance/MeanDecreaseAccuracy_resistance_3.txt", sep = " ",header = T)
+Voriconazole_resistance <- read.delim("/Users/stella/resistance/Voriconazole_resistance/MeanDecreaseAccuracy_resistance_4.txt", sep = " ", header = T)
+Posaconazole_resistance <- read.delim("/Users/stella/resistance/Posaconazole_resistance/MeanDecreaseAccuracy_resistance_5.txt", sep = " ", header = T)
+Terbinafin_resistance <- read.delim("/Users/stella/resistance/Terbinafin_resistance/MeanDecreaseAccuracy_resistance_6.txt", sep = " ", header = T)
+Caspofungi_resistance <- read.delim("/Users/stella/resistance/Caspofungi_resistance/MeanDecreaseAccuracy_resistance_7.txt", sep = " ", header = T)
+Amphotericin_B_resistance <- read.delim("/Users/stella/resistance/Amphotericin_B_resistance/MeanDecreaseAccuracy_resistance_8.txt", sep = " ", header = T)
+Resistance_to_azoles <- read.delim("/Users/stella/resistance/Resistance_to_azoles/MeanDecreaseAccuracy_resistance_9.txt", sep = " ", header = T)
+#Create data frame and concatenate data
+MDA <- data.frame(matrix(NA, nrow = 3176, ncol = 10))
+colnames(MDA) <- c("temp_37","X_FC_resistance","Fluconazole_resistance","Itraconazole_resistance","Voriconazole_resistance","Posaconazole_resistance","Terbinafin_resistance","Caspofungi_resistance","Amphotericin_B_resistance","Resistance_to_azoles")
+#concatenate data to empty data frame
+MDA$temp_37 <- rownames(temp_37)
+MDA$X_FC_resistance <- rownames(X_FC_resistance)
+MDA$Fluconazole_resistance <- rownames(Fluconazole_resistance)
+MDA$Itraconazole_resistance <- rownames(Itraconazole_resistance)
+MDA$Voriconazole_resistance <- rownames(Voriconazole_resistance)
+MDA$Posaconazole_resistance <- rownames(Posaconazole_resistance)
+MDA$Terbinafin_resistance <- rownames(Terbinafin_resistance)
+MDA$Caspofungi_resistance <- rownames(Caspofungi_resistance)
+MDA$Amphotericin_B_resistance <- rownames(Amphotericin_B_resistance)
+MDA$Resistance_to_azoles <- rownames(Resistance_to_azoles)
+```
+
+```{r}
+#Top 350 Keggs
+#Used top 350 instead of to 352
+MDA <- MDA[1:350,]
+#comparison data frame
+comparison <- data.frame(matrix(NA, nrow = 3176, ncol = 11))
+colnames(comparison) <- c("temp_37","X_FC_resistance","Fluconazole_resistance","Itraconazole_resistance","Voriconazole_resistance","Posaconazole_resistance","Terbinafin_resistance","Caspofungi_resistance","Amphotericin_B_resistance","Resistance_to_azoles","count")
+rows <- rownames(temp_37)
+rownames(comparison) <- rows
+#start comparing!
+for (i in 1:10){
+  for (j in 1:350){
+    index <- match(MDA[j,i], rows)
+    comparison[index,i] <- TRUE
+  }
+}
+#count the number of Trues for each row
+comparison$count <- rowSums(comparison,na.rm = TRUE)
+#sort by count
+comparison <- comparison[order(-comparison$count),]
+#write file
+write.table(comparison, file="top_KEGG_MDA.txt")
+```
+
+# MeanDecreaseGini & KEGGS
+
+```{r}
+#read files
+temp_37_g <- read.delim("/Users/stella/RF Loop Results/MeanDecreaseGini.txt", sep = " ", header = T)
+X_FC_resistance_g <- read.delim("/Users/stella/resistance/X_FC_resistance/MeanDecreaseGini_resistance_1.txt", sep = " ", header = T)
+Fluconazole_resistance_g <- read.delim("/Users/stella/resistance/Fluconazole_resistance/MeanDecreaseGini_resistance_2.txt", sep = " ", header = T)
+Itraconazole_resistance_g <- read.delim("/Users/stella/resistance/Itraconazole_resistance/MeanDecreaseGini_resistance_3.txt", sep = " ",header = T)
+Voriconazole_resistance_g <- read.delim("/Users/stella/resistance/Voriconazole_resistance/MeanDecreaseGini_resistance_4.txt", sep = " ", header = T)
+Posaconazole_resistance_g <- read.delim("/Users/stella/resistance/Posaconazole_resistance/MeanDecreaseGini_resistance_5.txt", sep = " ", header = T)
+Terbinafin_resistance_g <- read.delim("/Users/stella/resistance/Terbinafin_resistance/MeanDecreaseGini_resistance_6.txt", sep = " ", header = T)
+Caspofungi_resistance_g <- read.delim("/Users/stella/resistance/Caspofungi_resistance/MeanDecreaseGini_resistance_7.txt", sep = " ", header = T)
+Amphotericin_B_resistance_g <- read.delim("/Users/stella/resistance/Amphotericin_B_resistance/MeanDecreaseGini_resistance_8.txt", sep = " ", header = T)
+Resistance_to_azoles_g <- read.delim("/Users/stella/resistance/Resistance_to_azoles/MeanDecreaseGini_resistance_9.txt", sep = " ", header = T)
+#Create data frame and concatenate data
+MDG <- data.frame(matrix(NA, nrow = 3176, ncol = 10))
+colnames(MDG) <- c("temp_37","X_FC_resistance","Fluconazole_resistance","Itraconazole_resistance","Voriconazole_resistance","Posaconazole_resistance","Terbinafin_resistance","Caspofungi_resistance","Amphotericin_B_resistance","Resistance_to_azoles")
+#concatenate data to empty data frame
+MDG$temp_37 <- rownames(temp_37_g)
+MDG$X_FC_resistance <- rownames(X_FC_resistance_g)
+MDG$Fluconazole_resistance <- rownames(Fluconazole_resistance_g)
+MDG$Itraconazole_resistance <- rownames(Itraconazole_resistance_g)
+MDG$Voriconazole_resistance <- rownames(Voriconazole_resistance_g)
+MDG$Posaconazole_resistance <- rownames(Posaconazole_resistance_g)
+MDG$Terbinafin_resistance <- rownames(Terbinafin_resistance_g)
+MDG$Caspofungi_resistance <- rownames(Caspofungi_resistance_g)
+MDG$Amphotericin_B_resistance <- rownames(Amphotericin_B_resistance_g)
+MDG$Resistance_to_azoles <- rownames(Resistance_to_azoles_g)
+```
+
+```{r}
+#Top 350 Keggs
+#Used top 350 instead of to 352
+MDG <- MDG[1:350,]
+#comparison data frame
+comparison_gini <- data.frame(matrix(NA, nrow = 3176, ncol = 11))
+colnames(comparison_gini) <- c("temp_37","X_FC_resistance","Fluconazole_resistance","Itraconazole_resistance","Voriconazole_resistance","Posaconazole_resistance","Terbinafin_resistance","Caspofungi_resistance","Amphotericin_B_resistance","Resistance_to_azoles","count")
+rows <- rownames(temp_37_g)
+rownames(comparison_gini) <- rows
+#start comparing!
+for (i in 1:10){
+  for (j in 1:350){
+    index <- match(MDG[j,i], rows)
+    comparison_gini[index,i] <- TRUE
+  }
+}
+#count the number of Trues for each row
+comparison_gini$count <- rowSums(comparison_gini,na.rm = TRUE)
+#sort by count
+comparison_gini <- comparison_gini[order(-comparison_gini$count),]
+#write file
+write.table(comparison_gini, file="top_KEGG_MDG.txt")
+```

@@ -1,0 +1,164 @@
+---
+title: "Comparison_species"
+output: html_document
+date: "2023-07-30"
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#read data, both testing and training
+temp_37_train <- read.delim("/Users/stella/RF Loop Results/Misclassify_train.txt", sep = " ", header = T)
+temp_37_test <- read.delim("/Users/stella/RF Loop Results/Misclassify_test.txt", sep = " ", header = T)
+match_indices <- match(row.names(temp_37_train), row.names(temp_37_test))
+#bind the 2 data frames
+temp_37 <- cbind(temp_37_train,temp_37_test[match_indices,-1])
+#combine data of train and test
+temp_37$misclassify <- temp_37$misclassify + temp_37$`temp_37_test[match_indices, -1]`
+#remove last column
+temp_37 <- temp_37[,1:2]
+
+#Resistance 1
+X_FC_resistance_train <- read.delim("/Users/stella/resistance/X_FC_resistance/Misclassify_train_resistance_1.txt", sep = " ", header = T)
+X_FC_resistance_test <- read.delim("/Users/stella/resistance/X_FC_resistance/Misclassify_test_resistance_1.txt", sep = " ", header = T)
+match_indices <- match(row.names(X_FC_resistance_train), row.names(X_FC_resistance_test))
+#bind the 2 data frames
+X_FC_resistance <- cbind(X_FC_resistance_train,X_FC_resistance_test[match_indices,-1])
+#combine data of train and test
+X_FC_resistance$misclassify <- X_FC_resistance$misclassify + X_FC_resistance$`X_FC_resistance_test[match_indices, -1]`
+#remove last column
+X_FC_resistance <- X_FC_resistance[,1:2]
+
+#Resistance 2
+Fluconazole_resistance_train <- read.delim("/Users/stella/resistance/Fluconazole_resistance/Misclassify_train_resistance_2.txt", sep = " ", header = T)
+Fluconazole_resistance_test <- read.delim("/Users/stella/resistance/Fluconazole_resistance/Misclassify_test_resistance_2.txt", sep = " ", header = T)
+match_indices <- match(row.names(Fluconazole_resistance_train), row.names(Fluconazole_resistance_test))
+#bind the 2 data frames
+Fluconazole_resistance <- cbind(Fluconazole_resistance_train,Fluconazole_resistance_test[match_indices,-1])
+#combine data of train and test
+Fluconazole_resistance$misclassify <- Fluconazole_resistance$misclassify + Fluconazole_resistance$`Fluconazole_resistance_test[match_indices, -1]`
+#remove last column
+Fluconazole_resistance <- Fluconazole_resistance[,1:2]
+
+#Resistance 3
+Itraconazole_resistance_train <- read.delim("/Users/stella/resistance/Itraconazole_resistance/Misclassify_train_resistance_3.txt", sep = " ", header = T)
+Itraconazole_resistance_test <- read.delim("/Users/stella/resistance/Itraconazole_resistance/Misclassify_test_resistance_3.txt", sep = " ", header = T)
+match_indices <- match(row.names(Itraconazole_resistance_train), row.names(Itraconazole_resistance_test))
+#bind the 2 data frames
+Itraconazole_resistance <- cbind(Itraconazole_resistance_train,Itraconazole_resistance_test[match_indices,-1])
+#combine data of train and test
+Itraconazole_resistance$misclassify <- Itraconazole_resistance$misclassify + Itraconazole_resistance$`Itraconazole_resistance_test[match_indices, -1]`
+#remove last column
+Itraconazole_resistance <- Itraconazole_resistance[,1:2]
+
+#Resistance 4
+Voriconazole_resistance_train <- read.delim("/Users/stella/resistance/Voriconazole_resistance/Misclassify_train_resistance_4.txt", sep = " ", header = T)
+Voriconazole_resistance_test <- read.delim("/Users/stella/resistance/Voriconazole_resistance/Misclassify_test_resistance_4.txt", sep = " ", header = T)
+match_indices <- match(row.names(Voriconazole_resistance_train), row.names(Voriconazole_resistance_test))
+#bind the 2 data frames
+Voriconazole_resistance <- cbind(Voriconazole_resistance_train,Voriconazole_resistance_test[match_indices,-1])
+#combine data of train and test
+Voriconazole_resistance$misclassify <- Voriconazole_resistance$misclassify + Voriconazole_resistance$`Voriconazole_resistance_test[match_indices, -1]`
+#remove last column
+Voriconazole_resistance <- Voriconazole_resistance[,1:2]
+
+#Resistance 5
+Posaconazole_resistance_train <- read.delim("/Users/stella/resistance/Posaconazole_resistance/Misclassify_train_resistance_5.txt", sep = " ", header = T)
+Posaconazole_resistance_test <- read.delim("/Users/stella/resistance/Posaconazole_resistance/Misclassify_test_resistance_5.txt", sep = " ", header = T)
+match_indices <- match(row.names(Posaconazole_resistance_train), row.names(Posaconazole_resistance_test))
+#bind the 2 data frames
+Posaconazole_resistance <- cbind(Posaconazole_resistance_train,Posaconazole_resistance_test[match_indices,-1])
+#combine data of train and test
+Posaconazole_resistance$misclassify <- Posaconazole_resistance$misclassify + Posaconazole_resistance$`Posaconazole_resistance_test[match_indices, -1]`
+#remove last column
+Posaconazole_resistance <- Posaconazole_resistance[,1:2]
+
+#Resistance 6
+Terbinafin_resistance_train <- read.delim("/Users/stella/resistance/Terbinafin_resistance/Misclassify_train_resistance_6.txt", sep = " ", header = T)
+Terbinafin_resistance_test <- read.delim("/Users/stella/resistance/Terbinafin_resistance/Misclassify_test_resistance_6.txt", sep = " ", header = T)
+match_indices <- match(row.names(Terbinafin_resistance_train), row.names(Terbinafin_resistance_test))
+#bind the 2 data frames
+Terbinafin_resistance <- cbind(Terbinafin_resistance_train,Terbinafin_resistance_test[match_indices,-1])
+#combine data of train and test
+Terbinafin_resistance$misclassify <- Terbinafin_resistance$misclassify + Terbinafin_resistance$`Terbinafin_resistance_test[match_indices, -1]`
+#remove last column
+Terbinafin_resistance <- Terbinafin_resistance[,1:2]
+
+#Resistance 7
+Caspofungi_resistance_train <- read.delim("/Users/stella/resistance/Caspofungi_resistance/Misclassify_train_resistance_7.txt", sep = " ", header = T)
+Caspofungi_resistance_test <- read.delim("/Users/stella/resistance/Caspofungi_resistance/Misclassify_test_resistance_7.txt", sep = " ", header = T)
+match_indices <- match(row.names(Caspofungi_resistance_train), row.names(Caspofungi_resistance_test))
+#bind the 2 data frames
+Caspofungi_resistance <- cbind(Caspofungi_resistance_train,Caspofungi_resistance_test[match_indices,-1])
+#combine data of train and test
+Caspofungi_resistance$misclassify <- Caspofungi_resistance$misclassify + Caspofungi_resistance$`Caspofungi_resistance_test[match_indices, -1]`
+#remove last column
+Caspofungi_resistance <- Caspofungi_resistance[,1:2]
+
+#Resistance 8
+Amphotericin_B_resistance_train <- read.delim("/Users/stella/resistance/Amphotericin_B_resistance/Misclassify_train_resistance_8.txt", sep = " ", header = T)
+Amphotericin_B_resistance_test <- read.delim("/Users/stella/resistance/Amphotericin_B_resistance/Misclassify_test_resistance_8.txt", sep = " ", header = T)
+match_indices <- match(row.names(Amphotericin_B_resistance_train), row.names(Amphotericin_B_resistance_test))
+#bind the 2 data frames
+Amphotericin_B_resistance <- cbind(Amphotericin_B_resistance_train,Amphotericin_B_resistance_test[match_indices,-1])
+#combine data of train and test
+Amphotericin_B_resistance$misclassify <- Amphotericin_B_resistance$misclassify + Amphotericin_B_resistance$`Amphotericin_B_resistance_test[match_indices, -1]`
+#remove last column
+Amphotericin_B_resistance <- Amphotericin_B_resistance[,1:2]
+
+#Resistance 9
+Resistance_to_azoles_train <- read.delim("/Users/stella/resistance/Resistance_to_azoles/Misclassify_train_resistance_9.txt", sep = " ", header = T)
+Resistance_to_azoles_test <- read.delim("/Users/stella/resistance/Resistance_to_azoles/Misclassify_test_resistance_9.txt", sep = " ", header = T)
+match_indices <- match(row.names(Resistance_to_azoles_train), row.names(Resistance_to_azoles_test))
+#bind the 2 data frames
+Resistance_to_azoles <- cbind(Resistance_to_azoles_train,Resistance_to_azoles_test[match_indices,-1])
+#combine data of train and test
+Resistance_to_azoles$misclassify <- Resistance_to_azoles$misclassify + Resistance_to_azoles$`Resistance_to_azoles_test[match_indices, -1]`
+#remove last column
+Resistance_to_azoles <- Resistance_to_azoles[,1:2]
+```
+
+```{r}
+#Remember that they are NOT ordered
+comparison <- data.frame(matrix(NA, nrow = 835, ncol = 11))
+colnames(comparison) <- c("temp_37","X_FC_resistance","Fluconazole_resistance","Itraconazole_resistance","Voriconazole_resistance","Posaconazole_resistance","Terbinafin_resistance","Caspofungi_resistance","Amphotericin_B_resistance","Resistance_to_azoles","misclassify_count")
+rows <- rownames(temp_37)
+rownames(comparison) <- rows
+#first col
+comparison$temp_37 <- temp_37$misclassify
+#second row
+index <- match(row.names(comparison),row.names(X_FC_resistance))
+comparison$X_FC_resistance <- X_FC_resistance$misclassify[index]
+#Third row
+index <- match(row.names(comparison),row.names(Fluconazole_resistance))
+comparison$Fluconazole_resistance <- Fluconazole_resistance$misclassify[index]
+#Forth row
+index <- match(row.names(comparison),row.names(Itraconazole_resistance))
+comparison$Itraconazole_resistance <- Itraconazole_resistance$misclassify[index]
+#Fifth row
+index <- match(row.names(comparison),row.names(Voriconazole_resistance))
+comparison$Voriconazole_resistance <- Voriconazole_resistance$misclassify[index]
+#Sixth row
+index <- match(row.names(comparison),row.names(Posaconazole_resistance))
+comparison$Posaconazole_resistance <- Posaconazole_resistance$misclassify[index]
+#Seventh row
+index <- match(row.names(comparison),row.names(Terbinafin_resistance))
+comparison$Terbinafin_resistance <- Terbinafin_resistance$misclassify[index]
+#Eighth row
+index <- match(row.names(comparison),row.names(Caspofungi_resistance))
+comparison$Caspofungi_resistance <- Caspofungi_resistance$misclassify[index]
+#Ninth row
+index <- match(row.names(comparison),row.names(Amphotericin_B_resistance))
+comparison$Amphotericin_B_resistance <- Amphotericin_B_resistance$misclassify[index]
+#Tenth row
+index <- match(row.names(comparison),row.names(Resistance_to_azoles))
+comparison$Resistance_to_azoles <- Resistance_to_azoles$misclassify[index]
+#combine all values and store in misclassify_count
+comparison$misclassify_count <- rowSums(comparison,na.rm = TRUE)
+#sort data frame
+comparison <- comparison[order(-comparison$misclassify_count),]
+#write file
+write.table(comparison, file="top_misclassifies_species.txt")
+```
+
