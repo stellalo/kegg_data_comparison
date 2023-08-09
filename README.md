@@ -41,7 +41,7 @@ rownames(comparison) <- rows
 <br/>
 
 - Loop through the top 350 KEGGs of the 10 characteristics. Use the match() function to find the row index of the KEGG value in variable <b>rows</b>, using that index, set comparison[index,characteristic] = TRUE.
-- Remeber that <b>MDA</b> (or MDG) stores only the top 250 KEGGs of each 10 characteristics. Whereas <b>comparison</b> stores all 3176 KEGGs.
+- Remember that <b>MDA</b> (or MDG) stores only the top 250 KEGGs of each 10 characteristics. Whereas <b>comparison</b> stores all 3176 KEGGs.
 
 <br/>
 
